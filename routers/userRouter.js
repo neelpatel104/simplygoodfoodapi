@@ -129,7 +129,8 @@ router.post('/login', async (req,res)=> {
                     // Generate Token and send cookie with the token
                     let token = jwt.generateAccessToken(response.data);
                     res.status(token.status).cookie('token', token.data, {path:'/', secure: true, httpOnly: true, sameSite: "none"}).send({
-                        message: "Login Successful!" + token.data,
+                        message: "Login Successful!",
+                        token: token.data,
                         response
                     });
                 } else {
