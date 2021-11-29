@@ -29,7 +29,7 @@ const app = express();
 dotenv.config({path: `./environments/.env.${process.env.NODE_ENV}`});
 
 // Start Middlewares
-app.use(cors({
+app.use('*', cors({
     origin: process.env.ALLOWED_HOSTS,
     credentials: true,
 }));
