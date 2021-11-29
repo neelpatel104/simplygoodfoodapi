@@ -3,14 +3,14 @@
  * @purpose This files exports the router that services request for user endpoints
  */
 
-// Library Imports 
+// Library Imports
 const express = require('express');
 const bcrypt = require('bcrypt');
 
-// Controller Import 
+// Controller Import
 const uc = require('../controllers/userController');
 
-// Helper Import 
+// Helper Import
 const jwt = require('../helpers/jwt/jwt');
 
 // HTTP Status Enums
@@ -22,7 +22,7 @@ const router = express.Router();
 /**
  * Get all users
  * @param {Request} req: No data needed for request
- * @param {Response<User[]>} res: List of all users in the database or 
+ * @param {Response<User[]>} res: List of all users in the database or
  *                           error: Error with proper status and message
  */
 router.get('/', jwt.verifyAccessToken, async (req, res) => {
@@ -42,12 +42,12 @@ router.get('/', jwt.verifyAccessToken, async (req, res) => {
 /**
  * Get a user with the given email in the url param
  * @param {Request} req: Request must contain an email in the url param
- * @param {Response<User>} res: User with the given email or 
+ * @param {Response<User>} res: User with the given email or
  *                         error: Error with proper status and message
  */
 router.get('/:email', jwt.verifyAccessToken, async (req, res)=>{
-    let fields; 
-    // If requestor isn't an admin, remove password field. 
+    let fields;
+    // If requestor isn't an admin, remove password field.
     if (req.user.role !='admin'){
         fields = '-password -roles';
     }
@@ -61,9 +61,9 @@ router.get('/:email', jwt.verifyAccessToken, async (req, res)=>{
 })
 
 /**
- * Register a seller by using data in request body 
+ * Register a seller by using data in request body
  * @param {Request} req: Request must contain a body with User Schema {@link ../models/user.js}
- * @param {Response<User>} res: The newly added user or 
+ * @param {Response<User>} res: The newly added user or
  *                         error: Error with proper status and message
  */
 router.post('/register/seller', async (req, res)=> {
@@ -85,9 +85,9 @@ router.post('/register/seller', async (req, res)=> {
 })
 
 /**
- * Register a buyer by using data in request body 
+ * Register a buyer by using data in request body
  * @param {Request} req: Request must contain a body with User Schema {@link ../models/user.js}
- * @param {Response<User>} res: The newly added user or 
+ * @param {Response<User>} res: The newly added user or
  *                         error: Error with proper status and message
  */
 router.post('/register/buyer', async (req, res)=> {
@@ -112,7 +112,7 @@ router.post('/register/buyer', async (req, res)=> {
 /**
  * Login a user with credentials provided in the request body
  * @param {Request} req: Request must contain a body with user credentials. Ex. {email: example@something.com, password: somepassword}
- * @param {Response<String>} res: The login successful string or 
+ * @param {Response<String>} res: The login successful string or
  *                           error: Error with proper status and message
  */
 router.post('/login', async (req,res)=> {
@@ -128,7 +128,7 @@ router.post('/login', async (req,res)=> {
                     response.data.password = undefined;
                     // Generate Token and send cookie with the token
                     let token = jwt.generateAccessToken(response.data);
-                    res.status(token.status).cookie('token', token.data, {sameSite: "none", secure: true}).send({
+                    res.status(token.status).cookie('token', token.data, {path:'/', secure: true, httpOnly: true, sameSite: "none"}).send({
                         message: "Login Successful!",
                         response
                     });
@@ -153,7 +153,7 @@ router.post('/login', async (req,res)=> {
 /**
  * Delete a user with the given email in the url param
  * @param {Request} req: Request must contain an email in the url param
- * @param {Response<User>} res: The newly deleted user and attached food items or 
+ * @param {Response<User>} res: The newly deleted user and attached food items or
  *                         error: Error with proper status and message
  */
 router.delete('/:email', jwt.verifyAccessToken, async (req,res)=>{
