@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: "Helvetica Neue", Helvetica;
+        padding: 16px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      h2 {
+        font-weight: 400;
+      }
+
+      table {
+        text-align: left;
+        width: 100%;
+        font-weight: 400;
+		border-spacing: 10px;
+        border-collapse: collapse;
+      }
+
+      th {
+        padding: 8px;
+        height: 50px;
+        background: #eeeeee;
+      }
+
+      tr {
+        height: 50px;
+		border-bottom: 1px solid #bfbfbf;
+      }
+
+      td {
+        padding: 8px;
+        width: fit-content;
+      }
+
+      /* tr:nth-child(even) {
+        background-color: #f2f2f2;
+      } */
+
+
+	code {
+		width:fit-content;
+		display:block;
+		border-radius:7px;
+		margin:8px 8px 8px 0;
+		padding:4px 8px 4px 8px;
+		background:#EEEEEE;
+	}
+
+	#get-cell, #post-cell, #put-cell, #delete-cell {
+		border-radius:10px;
+		padding: 2px 8px 2px 8px;
+		color:white;
+	}
+	#get-cell {
+		background:#00E676;
+	}
+
+	#post-cell {
+		background:#00B0FF;
+	}
+
+	#put-cell {
+		background: #FFC400;
+	}
+
+	#delete-cell {
+		background: #FF3D00;
+	}
+
+
+    </style>
+  </head>
+  <body>
+    <h1>Simply Good Food APIs</h1>
+    <hr />
+    <h2 id="endpoints">Endpoints</h2>
+    <h3 id="food-item-endpoints">Food Item Endpoints</h3>
+    <table class="tftable">
+      <thead>
+        <tr>
+          <th>Endpoint</th>
+
+          <th>Purpose</th>
+          <th>Payload</th>
+          <th>Response</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span id="get-cell"> GET </span> <br />
+            <code> /foodItems </code>
+          </td>
+
+          <td>
+            This endpoint returns all the food items currently stored in the
+            database.
+          </td>
+          <td><strong> None </strong></td>
+          <td>
+            List of
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/foodItem.js"
+            >
+              Food Item Objects
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span id="get-cell"> GET </span> <br />
+            <code> /foodItems/seller/:email </code>
+          </td>
+
+          <td>This endpoint returns a food item for the given seller</td>
+          <td>
+            <strong> URL Param </strong> <br />
+            Email
+          </td>
+          <td>
+            List of
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/foodItem.js"
+            >
+              Food Item Objects
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span id="get-cell"> GET </span> <br />
+            <code> /foodItems/food/:name </code>
+          </td>
+
+          <td>This endpoint returns a food item given the food name</td>
+          <td>
+            <strong> URL Param </strong> <br />
+            Name
+          </td>
+          <td>
+            List of
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/foodItem.js"
+            >
+              Food Item Objects
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span id="post-cell"> POST </span> <br />
+            <code> /foodItems </code>
+          </td>
+
+          <td>
+            This endpoint allows the client to create a food item by providing
+            the food item payload in the request body. It returns a success
+            message or an error message.
+          </td>
+          <td>
+            <strong> Request Body </strong> <br />
+            A
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/foodItem.js"
+            >
+              Food Item Object
+            </a>
+          </td>
+          <td>The newly added Food Item or an error message</td>
+        </tr>
+        <tr>
+          <td>
+            <span id="put-cell"> PUT </span> <br />
+            <code> /foodItems </code>
+          </td>
+
+          <td>
+            This endpoint allows the modofication of a food item currently in
+            the database. The request body must contain the updated food item.
+          </td>
+          <td>
+            <strong> Request Body </strong> <br />
+            An updated
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/foodItem.js"
+            >
+              Food Item Object
+            </a>
+          </td>
+          <td>The newly edited Food Item</td>
+        </tr>
+        <tr>
+          <td>
+            <span id="delete-cell"> DELETE </span> <br />
+            <code> /foodItems/:name </code>
+          </td>
+
+          <td>
+            This endpoint allows the client to delete a food item given the item
+            name.
+          </td>
+          <td>
+            <strong> URL Param </strong> <br />
+            Item Name
+          </td>
+          <td>
+            The newly deleted
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/foodItem.js"
+            >
+              Food Item
+            </a>
+            or an error message
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <hr />
+    <br />
+    <h3 id="user-endpoints">User Endpoints</h3>
+    <table class="tftable">
+      <thead>
+        <tr>
+          <th>Endpoint</th>
+
+          <th>Purpose</th>
+          <th>Payload</th>
+          <th>Response</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span id="get-cell"> GET </span> <br />
+            <code> /users </code>
+          </td>
+
+          <td>
+            This endpoint returns all the users currently stored in the system.
+          </td>
+          <td><strong> None </strong></td>
+          <td>
+            List of
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/user.js"
+            >
+              User Objects
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span id="get-cell"> GET </span> <br />
+            <code> /users/:email </code>
+          </td>
+
+          <td>
+            This endpoint returns the user that matches the given name in the
+            url parameter. It returns a success message or an error message.
+          </td>
+          <td>
+            <strong> URL Param </strong> <br />
+            email
+          </td>
+          <td>
+            1
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/user.js"
+            >
+              User Object
+            </a>
+            or an error message
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span id="post-cell"> POST </span> <br />
+            <code> /users/register/seller </code>
+          </td>
+
+          <td>
+            This endpoint allows the client to create a new user as a seller in
+            the system by providing the new user in the request body. It returns
+            a success message or an error message.
+          </td>
+          <td>
+            <strong> Request Body </strong> <br />
+            A
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/user.js"
+            >
+              User Object
+            </a>
+          </td>
+          <td>The newly added User or an error message</td>
+        </tr>
+        <tr>
+          <td>
+            <span id="post-cell"> POST </span> <br />
+            <code> /users/register/buyer </code>
+          </td>
+
+          <td>
+            This endpoint allows the client to create a new user as a buyer in
+            the system by providing the new user in the request body. It returns
+            a success message or an error message.
+          </td>
+          <td>
+            <strong> Request Body </strong> <br />
+            A
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/user.js"
+            >
+              User Object
+            </a>
+          </td>
+          <td>The newly added User or an error message</td>
+        </tr>
+        <tr>
+          <td>
+            <span id="post-cell"> POST </span> <br />
+            <code> /users/login </code>
+          </td>
+
+          <td>
+            This endpoint allows the client so sign in by providing the proper
+            credentials
+          </td>
+          <td>
+            <strong> Request Body </strong> <br />
+            email, password
+          </td>
+          <td>The logged in user details or an error message</td>
+        </tr>
+        <tr>
+          <td>
+            <span id="delete-cell"> DELETE </span> <br />
+            <code> /user/:email </code>
+          </td>
+
+          <td>
+            This endpoint allows the admin to delete a user given the email.
+          </td>
+          <td>
+            <strong> URL Param </strong> <br />
+            email
+          </td>
+          <td>
+            A
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/user.js"
+            >
+              User Object
+            </a>
+            or an error message
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <hr />
+    <br />
+    <h3 id="order-endpoints">Order Endpoints</h3>
+    <table class="tftable">
+      <thead>
+        <tr>
+          <th>Endpoint</th>
+
+          <th>Purpose</th>
+          <th>Payload</th>
+          <th>Response</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span id="get-cell"> GET </span> <br />
+            <code> /orders </code>
+          </td>
+
+          <td>
+            This endpoint returns all the orders currently stored in the system.
+          </td>
+          <td><strong> None </strong></td>
+          <td>
+            List of
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/order.js"
+            >
+              Order Objects
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span id="get-cell"> GET </span> <br />
+            <code> /orders/:email </code>
+          </td>
+
+          <td>
+            This endpoint returns all of the orders that has the email as either
+            the buyer or the seller
+          </td>
+          <td>
+            <strong> URL Param </strong> <br />
+            email
+          </td>
+          <td>
+            List
+            <a
+              href="https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-16/blob/M2/backend/models/order.js"
+            >
+              Order Objects
+            </a>
+            or an error message
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
