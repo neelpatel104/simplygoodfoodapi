@@ -66,9 +66,9 @@ module.exports.getOrdersForUser = async (email) => {
         let orders = await Order.aggregate([
             { 
                 "$match": {
-                    "$expr": {
+                    
                         "$or": [{seller: email}, {buyer: email}]
-                    }
+                    
                 }
             }, 
             { 
